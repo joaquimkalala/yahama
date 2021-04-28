@@ -55,6 +55,19 @@ class ProdutoController {
     return response.json({data:prod});
   }
 
+  async update ({ params,request, response}){
+
+    const input = request.all();
+    const prod = await Produto.find(params.id);
+    if (!prod){
+
+      return response.json ({data:null, msg:'Nenhuma informação encontrada ..'})
+    }
+    prod.merge(input);
+    await prod.save();
+    return response.json({data: prod});
+  }
+
   /**
    * Render a form to be used for creating a new produto.
    * GET produtos/create
