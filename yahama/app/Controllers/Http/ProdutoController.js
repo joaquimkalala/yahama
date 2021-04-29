@@ -4,7 +4,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-const Produto = use('app/Models/Produto')
+const Produto = use('App/Models/Produto');
 /**
  * Resourceful controller for interacting with produtos
  */
@@ -18,7 +18,10 @@ class ProdutoController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index ({ request, response }) {
+
+    const prods = await Produto.all();
+    return response.json({data : prods});
   }
 
   async store ({request, response}){
@@ -29,14 +32,10 @@ class ProdutoController {
 
   }
 
-  async index ({response}) {
-
-    const produto = await Produto.all();
-    return response.json ({data : prods});
-  }
-
+ 
   async show ({params, response}){
-    const prod = await Produto.find (params, id);
+    console.log(params);
+    const prod = await Produto.find (params.id);
     if (!prod){
 
       return response.json ({ data:null, msg: 'nenhuma informação encontrada ..' });
@@ -77,8 +76,8 @@ class ProdutoController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async create ({ request, response, view }) {
-  }
+ // async create ({ request, response, view }) {
+  //}
 
   /**
    * Create/save a new produto.
@@ -88,8 +87,8 @@ class ProdutoController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
-  }
+ // async store ({ request, response }) {
+  //}
 
   /**
    * Display a single produto.
@@ -100,8 +99,8 @@ class ProdutoController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
-  }
+ // async show ({ params, request, response, view }) {
+  //}
 
   /**
    * Render a form to update an existing produto.
@@ -112,8 +111,8 @@ class ProdutoController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async edit ({ params, request, response, view }) {
-  }
+ // async edit ({ params, request, response, view }) {
+  //}
 
   /**
    * Update produto details.
@@ -123,8 +122,8 @@ class ProdutoController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
-  }
+ // async update ({ params, request, response }) {
+  //}
 
   /**
    * Delete a produto with id.
@@ -134,8 +133,8 @@ class ProdutoController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
-  }
+ // async destroy ({ params, request, response }) {
+  //}
 }
 
 module.exports = ProdutoController

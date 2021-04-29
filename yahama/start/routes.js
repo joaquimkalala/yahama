@@ -19,3 +19,12 @@ const Route = use('Route')
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
+
+Route.group(() => {
+ Route.get ('/produtos', 'ProdutoController.index')
+ Route.post('/produtos','ProdutoController.store')
+ Route.get('/produtos/:id', 'ProdutoController.show')
+ Route.put('/produtos/:id','ProdutoController.update')
+ Route.delete('produtos/:id', 'ProdutoController.destroy')
+
+})
